@@ -4,6 +4,9 @@ echo -e "\n\e[32m*******************************"
 echo -e "* setup.sh - setup for edu-m2 *"
 echo -e "*******************************\e[0m"
 
+# Present release of Magento 2.4.1 requires Composer 1
+sudo composer self-update --1;
+
 php_version=php7.0
 site_domain='edu-m2.classaxe.com'
 
@@ -65,9 +68,9 @@ for i in "${sites[@]}"; do
 #    echo -e "\e[32m[OK]\e[0m"
 done
 
-php_7=$(ls -1 /opt/phpfarm/inst | grep php-7.0 | tail -n1 | cut -d'-' -f2)"    "
-echo -n "  Setting default PHP to ${php_7:0:8}               "
-sudo /opt/phpfarm/inst/bin/switch-phpfarm ${php_7} > /dev/null 2>&1;
+php_73=$(ls -1 /opt/phpfarm/inst | grep php-7.3 | tail -n1 | cut -d'-' -f2)"    "
+echo -n "  Setting default PHP to ${php_73:0:8}               "
+sudo /opt/phpfarm/inst/bin/switch-phpfarm ${php_73} > /dev/null 2>&1;
 echo -e "\e[32m[OK]\e[0m"
 
 echo "  Beginning Composer Installation:"
@@ -101,6 +104,7 @@ bin/magento setup:install \
 --timezone=America/Toronto \
 --session-save=db;
 
+composer self-update --rollback
 
 echo -e "\e[32m[OK]\e[0m"
 
