@@ -74,7 +74,7 @@ sudo /opt/phpfarm/inst/bin/switch-phpfarm ${php_73} > /dev/null 2>&1;
 echo -e "\e[32m[OK]\e[0m"
 
 echo "  Beginning Composer Installation:"
-composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /srv/www/edu-m2/magento
+COMPOSER_MEMORY_LIMIT=-1 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition /srv/www/edu-m2/magento
 
 echo -n "  Begining Magento 2 Setup:                    "
 cd /srv/www/edu-m2/magento
